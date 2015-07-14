@@ -1,2 +1,14 @@
+div.inout {
+  float: right;
+  padding-top: .5em;
+  display: inline; }
+  div.inout img {
+    border: 1px solid black; }
+  div.inout .profile {
+    width: 2.25em;
+    height: 2.25em;
+    display: inline;
+    margin: 3px; }
+
 .topic {
   text-align: center; }

@@ -29,7 +29,7 @@ var notify = function(error) {
     message += '\nOn Line: ' + error.lineNumber;
   }
 
-  notifier.notify({title: title, message: message});
+  console.log(title+"\n"+message);
 };
 
 var bundler = watchify(browserify({

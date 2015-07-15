@@ -30,7 +30,7 @@ module.exports = Reflux.createStore({
     }.bind(this), { remember: 'sessionOnly', scope: 'email' });
   },
   handleLoginError (error) {
-    this.usersRef.child('errors/').push(error);
+    this.usersRef.child('errors/').push({ error });
     switch (error.code) {
       case 'TRANSPORT_UNAVAILABLE':
         this.transportUnavailable(error);

@@ -2,19 +2,27 @@ var React = require('react');
 var Content = require('../components/content')
 var Header = require('./header')
 var Footer = require('./footer')
+var mui = require('material-ui')
+var AppCanvas = mui.AppCanvas
+var ThemeManager = new mui.Styles.ThemeManager()
+
 
 module.exports = React.createClass({
-  places: [
-    {name:'Login',link:'/login',key:'1'},
-    {name:'Logout',link:'/logout',key:'2'},
-    {name:'Home',link:'/home',key:'3'},
-  ],
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+
+  getChildContext: function() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
   render () {
-    return <div>
-      <Header places={this.places}/>
+    return <AppCanvas>
+      <Header />
       {this.content()}
       <Footer />
-    </div>
+    </AppCanvas>
   },
   content () {
     if(this.props.children) {

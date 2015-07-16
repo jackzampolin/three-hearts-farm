@@ -57,9 +57,9 @@ var Header = React.createClass({
       },
     ];
     if (this.state.user) {
-      var uid = this.state.user.uid.match(/\d+/)[0]
+      var uid = parseInt(this.state.user.uid.match(/\d+/)[0]).toString(30)
       menuItems.splice(2,0,{
-        route: uid,
+        route: 'users/' + uid,
         text: 'Profile',
         onTouchTap: this.handleMenuClick }
       )

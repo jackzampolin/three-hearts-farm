@@ -8,13 +8,12 @@ var _ = require('lodash');
 // https://www.firebase.com/docs/web/guide/login/google.html
 
 module.exports = Reflux.createStore({
-
   listenables: [Actions],
-
   baseRef: new Firebase(consts.firebaseUrl),
-
   usersRef: new Firebase(consts.firebaseUrl + 'users/'),
-
+  getCurrentUser () {
+    this.trigger('change', this.currentUser)
+  },
   login () {
     this.baseRef.authWithOAuthPopup('google', function(error,authData) {
       if (error) {
@@ -28,6 +27,32 @@ module.exports = Reflux.createStore({
         this.onValue(authData);
       }
     }.bind(this), { remember: 'sessionOnly', scope: 'email' });
+  },
+  logout () {
+    this.baseRef.unauth()
+  },
+  setCurrentUser (profile) {
+    this.currentUser = profile
+    this.trigger('change',this.currentUser);
+  },
+  loginCompleted (authData) {
+    this.userRef = new Firebase(consts.firebaseUrl + 'users/' + authData.uid);
+  },
+  onValue (authData) {
+    this.userRef.on('value', function(profile){
+      this.setCurrentUser(profile.val())
+    }.bind(this));
+  },
+  onAuth(authData) {
+    this.userRef.onAuth(function(authData){
+      if (!!authData) {
+        this.userRef.update({ isLoggedIn: true })
+      } else {
+        this.userRef.update({ isLoggedIn: false });
+        this.currentUser = null;
+        this.trigger('change', this.currentUser)
+      }
+    }.bind(this))
   },
   handleLoginError (error) {
     this.usersRef.child('errors/').push({ error });
@@ -75,39 +100,5 @@ module.exports = Reflux.createStore({
   },
   userDenied (error) {
     console.log(error)
-  },
-  logout () {
-    this.baseRef.unauth()
-  },
-  setCurrentUser (profile) {
-    this.currentUser = profile
-    this.trigger('change',this.currentUser);
-  },
-  loginCompleted (authData) {
-    this.userRef = new Firebase(consts.firebaseUrl + 'users/' + authData.uid);
-  },
-  onValue (authData) {
-    this.userRef.on('value', function(profile){
-      this.setCurrentUser(profile.val())
-    }.bind(this));
-  },
-  onAuth(authData) {
-    this.userRef.onAuth(function(authData){
-      if (!!authData) {
-        var profile = {
-          uid: authData.uid,
-          name: authData.google.displayName,
-          profileImageURL: authData.google.profileImageURL,
-          email: authData.google.email,
-          isLoggedIn: true
-        };
-        this.userRef.update(profile)
-        this.setCurrentUser(profile)
-      } else {
-        this.userRef.update({ isLoggedIn: false });
-        this.currentUser = null;
-        this.trigger('change', this.currentUser)
-      }
-    }.bind(this))
   },
 });

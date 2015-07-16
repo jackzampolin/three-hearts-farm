@@ -14,7 +14,6 @@ module.exports = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
-
   getChildContext: function() {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
@@ -23,7 +22,7 @@ module.exports = React.createClass({
   render () {
     return <AppCanvas>
       <Header />
-      {this.content()}
+        {this.content()}
       <Footer />
     </AppCanvas>
   },

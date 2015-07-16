@@ -1,89 +1,93 @@
 var React = require('react');
 var Router = require('react-router');
-var Reflux = require('reflux')
+var Reflux = require('reflux');
 var Actions = require('../actions');
-var UserStore = require('../stores/users-store')
-var mui = require('material-ui')
-var ThemeManager = new mui.Styles.ThemeManager()
-var Link = Router.Link
+var UserStore = require('../stores/users-store');
+var mui = require('material-ui');
+var ThemeManager = new mui.Styles.ThemeManager();
+var Link = Router.Link;
 var AppBar = mui.AppBar;
-var Styles = mui.Styles;
 var FlatButton = mui.FlatButton;
-var Avatar = mui.Avatar;
-var RaisedButton = mui.RaisedButton;
+var FontIcon = mui.FontIcon;
 var MenuItem = mui.MenuItem;
-var LeftNav = mui.LeftNav;
 var IconButton = mui.IconButton;
-
+var LeftNav = mui.LeftNav;
+var Avatar = mui.Avatar;
 
 var Header = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object,
   },
-  getChildContext: function() {
+  getChildContext () {
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
   mixins : [
     Reflux.listenTo(UserStore, 'onChange'),
-    mui.Styles
+    Router.Navigation
   ],
   getInitialState () {
     return {
-      user: null
+      user: null,
     }
+  },
+  handleMenuClick (event, selectedIndex, menuItem) {
+    this.transitionTo(menuItem.route)
   },
   render () {
     menuItems = [
-      { route: '/', text: 'Home' },
-      { route: '/storefront', text: 'Online Store' },
-      { route: '/components', text: 'Components' },
+      { route: '/', text: 'Home', onTouchTap: this.handleMenuClick },
+      { route: 'storefront', text: 'Storefront', onTouchTap: this.handleMenuClick },
       { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
       {
          type: MenuItem.Types.LINK,
-         payload: 'http://ofrf.org/education/database',
-         text: 'Organic Education'
+         payload: 'https://google.com',
+         text: 'User Defined'
       },
       {
          type: MenuItem.Types.LINK,
-         payload: 'http://organicfarmingworks.com/resources/',
-         text: 'Organic Farming Works'
+         payload: 'https://google.com',
+         text: 'User Defined'
       },
       {
          type: MenuItem.Types.LINK,
-         payload: 'http://www.nrcs.usda.gov/wps/portal/nrcs/main/national/landuse/crops/organic/',
-         text: 'Natural Resources Conservation Service'
+         payload: 'https://google.com',
+         text: 'User Defined'
       },
     ];
     if (this.state.user) {
-      var uid = this.state.user.uid.match(/\d+/)[0];
-      var payload = { route: '/users/'+uid, text: 'Customer Profile' };
-      menuItems.splice(2,0,payload)
+      var uid = this.state.user.uid.match(/\d+/)[0]
+      menuItems.splice(2,0,{
+        route: uid,
+        text: 'Profile',
+        onTouchTap: this.handleMenuClick }
+      )
     };
-    var style = { top: '10%' }
-    return (<div>
+    return <div>
       <LeftNav
         ref="leftNav"
         docked={false}
         menuItems={menuItems}
-        style={style}
+        onChange={this.handleMenuClick}
       />
       <AppBar
         ref='appBar'
         title="Three Hearts Farm"
-        iconElementLeft={<IconButton
-          iconClassName="material-icons"
-          onClick={this.leftMenuClick}>
-          menu
-        </IconButton>}
+        iconElementLeft={ this.leftMenuClick() }
         iconElementRight={ this.state.user ? this.loggedIn() : this.loggedOut() }
       />
     </div>
-    );
   },
   leftMenuClick () {
-    this.refs.leftNav.toggle()
+    return <IconButton
+      iconClassName="material-icons"
+      onClick={this.menuToggle}>
+      menu
+    </IconButton>;
+  },
+  menuToggle () {
+    this.refs.leftNav ? this.refs.leftNav.toggle() : null
   },
   onChange (event, user) {
     if (!!user && user.isLoggedIn) {
@@ -110,3 +114,25 @@ var Header = React.createClass({
 });
 
 module.exports = Header;
+
+// leftMenuClick () {
+//   var menuOptions = [
+//     <MenuItem
+//       index={1}
+//       attribute={'Home'}
+//       onClick={this.home}
+//       primaryText="Maps"/>,
+//     <MenuItem
+//       index={2}
+//       attribute={'Storefront'}
+//       onClick={this.storefront}
+//       primaryText="Books"/>,
+//   ];
+//   var iconButton = <IconButton iconClassName="material-icons" onClick={this.menuToggle}>menu</IconButton>;
+//   return <IconMenu
+//     openDirection='bottom-right'
+//     ref='iconMenu'
+//     iconButtonElement={iconButton}>
+//     { menuOptions }
+//   </IconMenu>
+// },

@@ -8,6 +8,9 @@ var Main = require('./defaults/main')
 
 module.exports = (
   <Router history={new HashHistory.default}>
-    <Route path='/' component={Main} />
+    <Route path='/' component={Main}>
+      <Route path='/storefront' component={Storefront} />
+      <Route path='/users/:id' component={UserPage} />
+    </Route>
   </Router>
 )

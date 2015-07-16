@@ -1,3 +1,6 @@
+body {
+  margin: 0px; }
+
 div.inout {
   float: right;
   padding-top: .5em;
@@ -9,6 +12,3 @@ div.inout {
     height: 2.25em;
     display: inline;
     margin: 3px; }
-
-.topic {
-  text-align: center; }

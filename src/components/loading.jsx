@@ -2,9 +2,9 @@ var React = require('react');
 var mui = require('material-ui')
 var CircularProgress = mui.CircularProgress;
 
-module.exports = React.createClass({
+var Loading = React.createClass({
 
-  render: function() {
+  render () {
     return (
       <CircularProgress
         size={3}
@@ -18,3 +18,5 @@ module.exports = React.createClass({
   }
 
 });
+
+module.exports = Loading

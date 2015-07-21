@@ -1,21 +1,32 @@
 var React = require('react');
-var mui = require('material-ui')
-var Paper = mui.Paper;
+var Constants = require('../utils/constants')
+var mui = require('material-ui');
 var CardMedia = mui.CardMedia;
+var Card = mui.Card;
+var Footer = require('./footer')
+var Default = require('../pages/default')
 
-module.exports = React.createClass({
-
-  render: function() {
-    return <Paper style={{
-      margin: 'auto',
-      width: '90%',
-      height: '100%',
-      padding: '10px',
-    }}>
-      <CardMedia><img src='./assets/images/winter_sunset.jpg' /></CardMedia>
-    </Paper>
-  }
-
+var Splash = React.createClass({
+  contextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext () {
+    return {
+      muiTheme: Constants.themeManager
+    };
+  },
+  render () {
+    return <Card>
+      <CardMedia style={{ paddingTop: '3em'}}>
+        <img src='./assets/images/thfheader.png' />
+      </CardMedia>
+        { this.props.children ? this.props.children : <Default /> }
+      <Footer />
+    </Card>
+  },
 });
 
-;
+module.exports = Splash;

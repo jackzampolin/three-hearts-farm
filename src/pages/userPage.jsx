@@ -11,7 +11,7 @@ var Avatar = mui.Avatar;
 var Paper = mui.paper
 
 
-module.exports = React.createClass({
+var UserPage = React.createClass({
   mixins : [
     Reflux.listenTo(UserStore, 'onChange')
   ],
@@ -53,3 +53,5 @@ module.exports = React.createClass({
     return <Loading />
   },
 });
+
+module.exports = UserPage

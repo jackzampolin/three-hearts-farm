@@ -5,7 +5,7 @@ var Paper = mui.Paper
 var CardMedia = mui.CardMedia
 
 
-module.exports = React.createClass({
+var Storefront = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object,
   },
@@ -27,3 +27,5 @@ module.exports = React.createClass({
   }
 
 });
+
+module.exports = Storefront

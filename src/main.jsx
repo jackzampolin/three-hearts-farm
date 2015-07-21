@@ -44,18 +44,14 @@ var Main = React.createClass({
     this.transitionTo(menuItem.route)
   },
   render () {
-    var menuItems = Constants.leftMenuItems;
-    if (this.state.user) {
+    var user = this.state.user
+    var basicMenu = Constants.leftMenuItems.basic
+    var partnerMenu = Constants.leftMenuItems.partner
+    var menuItems = basicMenu.concat(partnerMenu)
+    if (user) {
       var uid = parseInt(this.state.user.uid.match(/\d+/)[0]).toString(30)
-      menuItems.splice(0,0,{
-        route: 'users/' + uid,
-        text: 'Profile',
-        onTouchTap: this.handleMenuClick
-      },{
-        route: 'storefront',
-        text: 'Storefront',
-        onTouchTap: this.handleMenuClick
-      })
+      var userMenu = Constants.leftMenuItems.user(uid)
+      menuItems.splice(0,0,userMenu[0],userMenu[1])
     };
     return <AppCanvas>
       <LeftNav

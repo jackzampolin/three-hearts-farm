@@ -18,12 +18,13 @@ var About = React.createClass({
     };
   },
   render () {
+    var assets = Constants.staticPages.aboutPage
     return <Paper style={{ width: '90%', margin: 'auto'}}>
       <CardMedia>
-        <img src={Constants.about.image} />
+        <img src={ assets.image } />
       </CardMedia>
       <CardTitle title="Three Hearts Farms" subtitle="About"/>
-      <CardText style={{ fontSize: '1.2em'}}>{Constants.about.text}</CardText>
+      <CardText style={{ fontSize: '1.2em'}}>{ assets.text }</CardText>
     </Paper>
   },
 });

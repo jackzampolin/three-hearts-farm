@@ -24,12 +24,13 @@ var Default = React.createClass({
     return null
   },
   render () {
+    var assets = Constants.staticPages.defaultPage
     return <Paper style={{ width: '90%', margin: 'auto'}}>
       <CardMedia>
-        <img src={Constants.default.image} />
+        <img src={assets.image} />
       </CardMedia>
       <CardTitle title="Three Hearts Farms" subtitle="Welcome!"/>
-      <CardText style={{ fontSize: '1.2em'}}>{Constants.default.text}</CardText>
+      <CardText style={{ fontSize: '1.2em'}}>{assets.text}</CardText>
     </Paper>
 
   },

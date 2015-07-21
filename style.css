@@ -7,6 +7,9 @@ body {
     github: https://github.com/jkymarsh
     version: 1.0
 */
+.faced {
+  margin: auto; }
+
 /*
     http://www.paulirish.com/2012/box-sizing-border-box-ftw/
 */

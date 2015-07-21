@@ -3,11 +3,11 @@ var mui = require('material-ui');
 var MenuItem = mui.MenuItem;
 
 var basic = [
-  { route: '/', text: 'Home', iconClassName: 'material-icons', onTouchTap: this.handleMenuClick },
-  { route: 'blog', text: 'Blog', onTouchTap: this.handleMenuClick },
-  { route: 'about', text: 'About', onTouchTap: this.handleMenuClick },
-  { route: 'contact', text: 'Contact', onTouchTap: this.handleMenuClick },
-  { route: 'team', text: 'Team', onTouchTap: this.handleMenuClick },
+  { route: '/', text: 'Home', iconClassName: 'material-icons' },
+  { route: 'blog', text: 'Blog' },
+  { route: 'about', text: 'About' },
+  { route: 'contact', text: 'Contact' },
+  { route: 'team', text: 'Team' },
   { type: MenuItem.Types.SUBHEADER, text: 'Partners' }
 ];
 

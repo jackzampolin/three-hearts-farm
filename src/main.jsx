@@ -45,12 +45,13 @@ var Main = React.createClass({
   },
   render () {
     var user = this.state.user
-    var basicMenu = Constants.leftMenuItems.basic
-    var partnerMenu = Constants.leftMenuItems.partner
+    var menu = Constants.leftMenuItems
+    var basicMenu = menu.basic
+    var partnerMenu = menu.partner
     var menuItems = basicMenu.concat(partnerMenu)
     if (user) {
       var uid = parseInt(this.state.user.uid.match(/\d+/)[0]).toString(30)
-      var userMenu = Constants.leftMenuItems.user(uid)
+      var userMenu = menu.user(uid)
       menuItems.splice(0,0,userMenu[0],userMenu[1])
     };
     return <AppCanvas>

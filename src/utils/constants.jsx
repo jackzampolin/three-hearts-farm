@@ -15,4 +15,5 @@ var phone = '406-600-8874'
 var firebaseUrl = 'https://brewdoctor-react.firebaseio.com/'
 
 var Constants = { styles, email, phone, errorMessages, firebaseUrl, themeManager, staticPages, imagePath, leftMenuItems };
+
 module.exports = Constants;

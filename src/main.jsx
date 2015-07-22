@@ -2,16 +2,22 @@
 // inheritance chain.  Was having problems with owner,
 // a React relationship, != parent, a DOM relationship.
 
-// Require various libraries
+// Node Modules
 var React = require('react');
 var Router = require('react-router');
 var Reflux = require('reflux');
-var Actions = require('./actions');
-var Constants = require('./utils/constants');
 var mui = require('material-ui');
 
-// Components and Stores required
+// Local Files
+var Actions = require('./actions');
+var utl = require('./utils/utl');
 var UserStore = require('./stores/users-store');
+var LeftNavBar = require('./components/leftNavBar');
+var ActionAccountCircle = require('./svgIcons/actionAccountCircle');
+var CommunicationVpnKey = require('./svgIcons/communicationVpnKey');
+var NavigationMenu = require('./svgIcons/navigationMenu');
+
+// Components
 var Link = Router.Link;
 var AppBar = mui.AppBar;
 var FlatButton = mui.FlatButton;
@@ -21,6 +27,7 @@ var IconButton = mui.IconButton;
 var LeftNav = mui.LeftNav;
 var Avatar = mui.Avatar;
 var AppCanvas = mui.AppCanvas;
+var Snackbar = mui.Snackbar;
 
 var Main = React.createClass({
   childContextTypes: {
@@ -28,82 +35,80 @@ var Main = React.createClass({
   },
   getChildContext () {
     return {
-      muiTheme: Constants.themeManager
+      muiTheme: utl.themeManager
     };
   },
   mixins : [
-    Reflux.listenTo(UserStore, 'onChange'),
-    Router.Navigation
+    Reflux.listenTo(UserStore, '_onChange'),
   ],
   getInitialState () {
     return {
       user: null,
     }
   },
-  handleMenuClick (event, selectedIndex, menuItem) {
-    this.transitionTo(menuItem.route)
-  },
   render () {
-    var menuItems = Constants.leftMenuItems;
-    if (this.state.user) {
-      var uid = parseInt(this.state.user.uid.match(/\d+/)[0]).toString(30)
-      menuItems.splice(0,0,{
-        route: 'users/' + uid,
-        text: 'Profile',
-        onTouchTap: this.handleMenuClick
-      },{
-        route: 'storefront',
-        text: 'Storefront',
-        onTouchTap: this.handleMenuClick
-      })
-    };
+    var user = this.state.user
     return <AppCanvas>
-      <LeftNav
-        ref="leftNav"
-        docked={false}
-        menuItems={menuItems}
-        onChange={this.handleMenuClick}
+      <LeftNavBar
+        ref='navRef'
+        uid={ user ? this._parseNumber(user.uid) : null }
       />
       <AppBar
-        ref='appBar'
         title="Three Hearts Farm"
-        iconElementLeft={ this.leftMenuClick() }
-        iconElementRight={ this.state.user ? this.loggedIn() : this.loggedOut() }
+        iconElementLeft={
+          <IconButton onClick={this._menuToggle}>
+            <NavigationMenu/>
+          </IconButton>
+        }
+        iconElementRight={ user ? this._loggedIn() : this._loggedOut() }
       />
       { this.props.children }
     </AppCanvas>
   },
-  leftMenuClick () {
-    return <IconButton
-      iconClassName="material-icons"
-      onClick={this.menuToggle}>
-      menu
-    </IconButton>;
+  _parseNumber (uid) {
+    return parseInt(uid.match(/\d+/)[0]).toString(30)
   },
-  menuToggle () {
-    this.refs.leftNav ? this.refs.leftNav.toggle() : null
+  _menuToggle () {
+    this.refs.navRef ? this.refs.navRef.refs.navRef.toggle() : null
   },
-  onChange (event, user) {
+  _onChange (event, user) {
     if (!!user && user.isLoggedIn) {
       this.setState({ user })
     } else {
       this.setState({ user: null })
     }
   },
-  loggedIn () {
-    return <FlatButton
-      label='Logout'
-      tooltipPosition="bottom-center"
-      onClick={Actions.logout}
-      tooltip="Logout" />
+  _loggedIn () {
+    return <div>
+      <IconButton
+        tooltip="Logout"
+        tooltipPosition="bottom-center"
+        onClick={Actions.logout}
+        touch={true}
+      >
+        <ActionAccountCircle color={'white'}/>
+      </IconButton>
+      <Snackbar
+        ref='snackbar'
+        message="Logged In Successfully!"
+        action="dismiss"
+        openOnMount={true}
+        onActionTouchTap={this._handleDismissClick}
+      />
+    </div>
   },
-  loggedOut () {
-    return <FlatButton
-      label='Login'
+  _handleDismissClick () {
+    this.refs.snackbar.dismiss()
+  },
+  _loggedOut () {
+    return <IconButton
+      tooltip="Login"
       tooltipPosition="bottom-center"
       onClick={Actions.login}
-      tooltip="Login" />
-
+      touch={true}
+    >
+      <CommunicationVpnKey />
+    </IconButton>
   },
 });
 

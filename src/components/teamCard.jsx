@@ -1,6 +1,12 @@
+// Node Modules
 var React = require('react');
-var Constants = require('../utils/constants');
 var mui = require('material-ui');
+
+// Local Files
+var utl = require('../utils/utl');
+var CommunicationEmail = require('../svgIcons/communicationEmail');
+
+// Elements
 var Paper = mui.Paper;
 var CardTitle = mui.CardTitle;
 var Card = mui.Card;
@@ -16,7 +22,7 @@ var teamCard = React.createClass({
   },
   getChildContext () {
     return {
-      muiTheme: Constants.themeManager
+      muiTheme: utl.themeManager
     };
   },
   render () {
@@ -27,12 +33,9 @@ var teamCard = React.createClass({
       <CardHeader
         title={this.props.name}
         subtitle={this.props.position}
-        avatar={<Avatar icon={
-            <FontIcon className="material-icons">{this.props.icon}</FontIcon>
-          }
-        /> }
+        avatar={<CommunicationEmail style={{ width:'2em', height: '2em'}}/>}
       />
-      <CardText>{this.props.text}</CardText>
+      <CardText style={{ marginTop: '-1em' }}>{this.props.text}</CardText>
     </Card>
   },
 });

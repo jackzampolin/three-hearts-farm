@@ -1,22 +1,39 @@
-var React = require('react');
-var Constants = require('../utils/constants');
+// Node Modules
+var React = require('react')
+var Router = require('react-router');
 var mui = require('material-ui');
 
+// Local Files
+var utl = require('../utils/utl');
 
+// Elements
+var LeftNav = mui.LeftNav;
 
-var leftNavBar = React.createClass({
-
-  render() {
-    return <div>
+var LeftNavBar = React.createClass({
+  mixins: [
+    Router.Navigation
+  ],
+  render () {
+    var menu = utl.leftMenuItems
+    var basicMenu = menu.basic
+    var partnerMenu = menu.partner
+    var menuItems = basicMenu.concat(partnerMenu)
+    if (this.props.uid) {
+      var userMenu = menu.user(this.props.uid)
+      menuItems.splice(0,0,userMenu[0],userMenu[1])
+    };
+    return  <div>
       <LeftNav
-        ref="leftNav"
+        ref='navRef'
         docked={false}
         menuItems={menuItems}
-        onChange={this.handleMenuClick}
+        onChange={this._handleMenuClick}
       />
     </div>
-  }
-
+  },
+  _handleMenuClick (event, selectedIndex, menuItem) {
+    this.transitionTo(menuItem.route)
+  },
 });
 
-module.exports = leftNavBar;
+module.exports = LeftNavBar

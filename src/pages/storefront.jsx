@@ -1,6 +1,6 @@
 var React = require('react');
 var mui = require('material-ui')
-var ThemeManager = new mui.Styles.ThemeManager()
+var utl = require('../utils/utl')
 var Paper = mui.Paper
 var CardMedia = mui.CardMedia
 
@@ -11,7 +11,7 @@ var Storefront = React.createClass({
   },
   getChildContext () {
     return {
-      muiTheme: ThemeManager.getCurrentTheme()
+      muiTheme: utl.themeManager
     };
   },
   render () {

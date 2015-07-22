@@ -1,49 +1,52 @@
+// Node Modules
 var Reflux = require('reflux');
-var Actions = require('../actions');
 var Firebase = require('firebase');
-var consts = require('../utils/constants');
 var _ = require('lodash');
+
+// Local Files
+var utl = require('../utils/utl');
+var Actions = require('../actions');
 
 // Firebase Auth data
 // https://www.firebase.com/docs/web/guide/login/google.html
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
-  baseRef: new Firebase(consts.firebaseUrl),
-  usersRef: new Firebase(consts.firebaseUrl + 'users/'),
+  _baseRef: new Firebase(utl.firebaseUrl),
+  _usersRef: new Firebase(utl.firebaseUrl + 'users/'),
   getCurrentUser () {
     this.trigger('change', this.currentUser)
   },
   login () {
-    this.baseRef.authWithOAuthPopup('google', function(error,authData) {
+    this._baseRef.authWithOAuthPopup('google', function(error,authData) {
       if (error) {
-        this.handleLoginError(error);
+        this._handleLoginError(error);
       } else {
         // Sets the user ref for the session
-        this.loginCompleted(authData);
+        this._loginCompleted(authData);
         // Sets event listener for auth events
-        this.onAuth(authData);
+        this._onAuth(authData);
         // Sets event listener for profile changes
-        this.onValue(authData);
+        this._onValue(authData);
       }
     }.bind(this), { remember: 'sessionOnly', scope: 'email' });
   },
   logout () {
-    this.baseRef.unauth()
+    this._baseRef.unauth()
   },
-  setCurrentUser (profile) {
+  _setCurrentUser (profile) {
     this.currentUser = profile
     this.trigger('change',this.currentUser);
   },
-  loginCompleted (authData) {
-    this.userRef = new Firebase(consts.firebaseUrl + 'users/' + authData.uid);
+  _loginCompleted (authData) {
+    this.userRef = new Firebase(utl.firebaseUrl + 'users/' + authData.uid);
   },
-  onValue (authData) {
+  _onValue (authData) {
     this.userRef.on('value', function(profile){
-      this.setCurrentUser(profile.val())
+      this._setCurrentUser(profile.val())
     }.bind(this));
   },
-  onAuth(authData) {
+  _onAuth(authData) {
     this.userRef.onAuth(function(authData){
       if (!!authData) {
         this.userRef.update({ isLoggedIn: true })
@@ -54,51 +57,51 @@ module.exports = Reflux.createStore({
       }
     }.bind(this))
   },
-  handleLoginError (error) {
-    this.usersRef.child('errors/').push({ error });
+  _handleLoginError (error) {
+    this._usersRef.child('errors/').push({ error });
     switch (error.code) {
       case 'TRANSPORT_UNAVAILABLE':
-        this.transportUnavailable(error);
+        this._transportUnavailable(error);
         break;
       case 'INVALID_PASSWORD':
-        this.invalidPassword(error);
+        this._invalidPassword(error);
         break;
       case 'INVALID_USER':
-        this.invalidUser(error);
+        this._invalidUser(error);
         break;
       case 'NETWORK_ERROR':
-        this.networkError(error);
+        this._networkError(error);
         break;
       case 'UNKNOWN_ERROR':
-        this.unknownError(error);
+        this._unknownError(error);
         break;
       case 'USER_CANCELLED':
-        this.userCancelled(error);
+        this._userCancelled(error);
         break;
       case 'USER_DENIED':
-        this.userDenied(error);
+        this._userDenied(error);
         break;
     }
   },
-  transportUnavailable (error) {
+  _transportUnavailable (error) {
     console.log(error)
   },
-  invalidPassword (error) {
+  _invalidPassword (error) {
     console.log(error)
   },
-  invalidUser (error) {
+  _invalidUser (error) {
     console.log(error)
   },
-  networkError (error) {
+  _networkError (error) {
     console.log(error)
   },
-  unknownError (error) {
+  _unknownError (error) {
     console.log(error)
   },
-  userCancelled (error) {
+  _userCancelled (error) {
     console.log(error)
   },
-  userDenied (error) {
+  _userDenied (error) {
     console.log(error)
   },
 });

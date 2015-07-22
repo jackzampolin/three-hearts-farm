@@ -1,18 +1,6 @@
 body {
   margin: 0px; }
 
-/*
-    trg - tiny responsive grid
-    author: j. ky marsh
-    github: https://github.com/jkymarsh
-    version: 1.0
-*/
-.faced {
-  margin: auto; }
-
-/*
-    http://www.paulirish.com/2012/box-sizing-border-box-ftw/
-*/
 .container,
 .row,
 .col {
@@ -20,9 +8,6 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-/*
-    https://css-tricks.com/snippets/css/clear-fix/
-*/
 .container:after,
 .row:after,
 .col:after {
@@ -30,23 +15,14 @@ body {
   display: table;
   clear: both; }
 
-/*
-    set bottom padding if desired
-*/
 .row {
   padding-bottom: 0; }
 
-/*
-    default column styles
-*/
 .col {
   display: block;
   float: left;
   width: 100%; }
 
-/*
-    tablet columns
-*/
 /* 800px */
 @media (min-width: 50em) {
   .gutters-t .col {
@@ -102,9 +78,6 @@ body {
   .gutters-t .span-12-t {
     width: 100%; } }
 
-/*
-    desktop columns
-*/
 /* 1200px */
 @media (min-width: 75em) {
   .gutters-t .col {

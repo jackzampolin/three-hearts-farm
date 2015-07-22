@@ -1,6 +1,11 @@
+// Node Modules
 var React = require('react');
 var mui = require('material-ui')
+// Local Files
+var utl = require('../utils/utl')
+// Elements
 var CircularProgress = mui.CircularProgress;
+var styles = utl.styles
 
 var Loading = React.createClass({
 
@@ -8,10 +13,7 @@ var Loading = React.createClass({
     return (
       <CircularProgress
         size={3}
-        style={{
-          paddingLeft: '40%',
-          paddingTop: '12em',
-        }}
+        style={styles.loadingPosition}
         mode="indeterminate"
       />
     );

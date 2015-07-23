@@ -4,7 +4,6 @@ node_modules
 *.pyc
 main.js
 style.css
-static
 .grunt
 _SpecRunner.html
 __benchmarks__

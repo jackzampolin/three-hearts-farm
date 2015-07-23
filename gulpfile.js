@@ -9,6 +9,7 @@ var server = require('gulp-server-livereload');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
+var webdriver = require('gulp-webdriver');
 
 var notify = function(error) {
   var message = 'In: ';
@@ -83,4 +84,16 @@ gulp.task('default', ['build', 'serve', 'sass', 'watch']);
 
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
+});
+
+// For testing
+
+gulp.task('test:local', function() {
+    return gulp.src('test/*.js', {
+        read: false
+    }).pipe(webdriver({
+        desiredCapabilities: {
+            browserName: 'chrome'
+        }
+    }));
 });

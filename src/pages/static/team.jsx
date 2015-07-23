@@ -22,7 +22,10 @@ var Team = React.createClass({
     var assets = utl.staticPages.teamPage
     var bios = utl.teamBios
     return <Paper style={styles.splashContainer}>
-      <CardTitle title={assets.title} subtitle={assets.subtitle}/>
+      <CardTitle
+        className='cardTitle'
+        title={assets.title}
+        subtitle={assets.subtitle}/>
       <div className={styles.row}>
         <div className={styles.halfSpan}>
           <TeamCard {...bios.betsyHicks}/>

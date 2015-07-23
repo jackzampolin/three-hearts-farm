@@ -56,7 +56,9 @@ var Main = React.createClass({
       <AppBar
         title="Three Hearts Farm"
         iconElementLeft={
-          <IconButton onClick={this._menuToggle}>
+          <IconButton
+            className='hamburgerMenu'
+            onClick={this._menuToggle}>
             <NavigationMenu/>
           </IconButton>
         }

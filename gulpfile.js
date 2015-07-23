@@ -94,6 +94,7 @@ gulp.task('test:local', function() {
     }).pipe(webdriver({
         desiredCapabilities: {
             browserName: 'chrome'
-        }
+        },
+        baseUrl: 'http://localhost:8000'
     }));
 });

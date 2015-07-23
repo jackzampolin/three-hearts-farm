@@ -25,6 +25,7 @@ var LeftNavBar = React.createClass({
     return  <div>
       <LeftNav
         ref='navRef'
+        className='navRef'
         docked={false}
         menuItems={menuItems}
         onChange={this._handleMenuClick}

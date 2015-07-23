@@ -31,6 +31,7 @@ var teamCard = React.createClass({
         <img src={this.props.faceShot}/>
       </CardMedia>
       <CardHeader
+        className='teamInfo'
         title={this.props.name}
         subtitle={this.props.position}
         avatar={<CommunicationEmail style={{ width:'2em', height: '2em'}}/>}

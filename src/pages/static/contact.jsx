@@ -34,8 +34,13 @@ var Contact = React.createClass({
       <div style={ styles.mapContainer }>
         <iframe style={ styles.iframe } src={ assets.mapPath } />
       </div>
-      <CardTitle title={ assets.title } subtitle={ assets.subtitle } />
-      <CardText style={ styles.splashText }>
+      <CardTitle
+        className='cardTitle'
+        title={ assets.title }
+        subtitle={ assets.subtitle } />
+      <CardText
+        className='cardText'
+        style={ styles.splashText }>
         <List>
           <ListItem
             primaryText={ utl.email }

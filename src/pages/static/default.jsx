@@ -25,8 +25,15 @@ var Default = React.createClass({
       <CardMedia>
         <img src={assets.image} />
       </CardMedia>
-      <CardTitle title={assets.title} subtitle={assets.subtitle}/>
-      <CardText style={styles.splashText}>{assets.text}</CardText>
+      <CardTitle
+        className='cardTitle'
+        title={assets.title}
+        subtitle={assets.subtitle}/>
+      <CardText
+        className='cardText'
+        style={styles.splashText}>
+        {assets.text}
+      </CardText>
     </Paper>
 
   },

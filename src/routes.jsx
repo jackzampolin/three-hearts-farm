@@ -7,12 +7,12 @@ injectTapEventPlugin();
 // Node Modules
 var React = require('react');
 var ReactRouter = require('react-router');
-var HashHistory = require('react-router/lib/hashhistory');
+var HashHistory = require('react-router/lib/HashHistory');
 
 // Local Files
 var Main = require('./main')
 var Storefront = require('./pages/storefront')
-var UserPage = require('./pages/userpage')
+var UserPage = require('./pages/userPage')
 var Contact = require('./pages/static/contact')
 var Team = require('./pages/static/team')
 var About = require('./pages/static/about')

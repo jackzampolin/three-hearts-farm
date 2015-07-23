@@ -4,12 +4,15 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
-var notifier = require('node-notifier');
 var server = require('gulp-server-livereload');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
+// For testing
 var webdriver = require('gulp-webdriver');
+var browserSync = require('browser-sync');
+var selenium = require('gulp-webdriver/node_modules/selenium-standalone');
+var mocha = require('gulp-mocha');
 
 var notify = function(error) {
   var message = 'In: ';
@@ -80,21 +83,63 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default', ['build', 'serve', 'sass', 'watch']);
-
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
+gulp.task('default', ['build', 'serve', 'sass', 'watch']);
+
+
 // For testing
 
-gulp.task('test:local', function() {
-    return gulp.src('test/*.js', {
-        read: false
-    }).pipe(webdriver({
-        desiredCapabilities: {
-            browserName: 'chrome'
-        },
-        baseUrl: 'http://localhost:8000'
-    }));
+gulp.task('serve:test', function (done) {
+  browserSync({
+    logLevel: 'silent',
+    notify: false,
+    open: false,
+    port: 9000,
+    server: {
+      baseDir: ['dist']
+    },
+    ui: false
+  }, done);
+});
+
+gulp.task('selenium', function (done) {
+  selenium.install({
+    version: '2.46.0',
+    baseURL: 'http://selenium-release.storage.googleapis.com',
+    drivers: {
+      chrome: {
+        version: '2.16',
+        arch: process.arch,
+        baseURL: 'http://chromedriver.storage.googleapis.com'
+      },
+      ie: {
+        version: '2.45',
+        arch: process.arch,
+        baseURL: 'http://selenium-release.storage.googleapis.com'
+      }
+    },
+    logger: function (message) { }
+  }, function (err) {
+    if (err) return done(err);
+
+    selenium.start(function (err, child) {
+      if (err) return done(err);
+      selenium.child = child;
+      done();
+    });
+  });
+});
+
+gulp.task('integration', ['serve:test', 'selenium'], function () {
+  return gulp.src('test/**/*.js', {read: false})
+    .pipe(mocha({ timeout: 5000 }));
+});
+
+gulp.task('test', ['integration'], function () {
+  selenium.child.kill();
+  browserSync.exit();
+  return null
 });

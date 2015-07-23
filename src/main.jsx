@@ -13,9 +13,9 @@ var Actions = require('./actions');
 var utl = require('./utils/utl');
 var UserStore = require('./stores/users-store');
 var LeftNavBar = require('./components/leftNavBar');
-var ActionAccountCircle = require('./svgIcons/actionAccountCircle');
-var CommunicationVpnKey = require('./svgIcons/communicationVpnKey');
-var NavigationMenu = require('./svgIcons/navigationMenu');
+var ActionAccountCircle = require('./components/svgIcons/actionAccountCircle');
+var CommunicationVpnKey = require('./components/svgIcons/communicationVpnKey');
+var NavigationMenu = require('./components/svgIcons/navigationMenu');
 
 // Components
 var Link = Router.Link;

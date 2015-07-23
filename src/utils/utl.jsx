@@ -4,23 +4,24 @@
 // Node Modules
 var React = require('react')
 var mui = require('material-ui');
+// Local Files
+var ENV = require('../../config/config');
+var farmInfo = require('./staticAssets/farmInfo')
 
-// Components of utl
-var themeManager = new mui.Styles.ThemeManager();
-var styles = require('./styles/styles')
-var leftMenuItems = require('./staticAssets/leftMenuItems')
-var staticPages = require('./staticAssets/staticPages')
-var errorMessages = require('./staticAssets/errorMessages')
-var imagePath = require('./staticAssets/imagePath')
-var email = 'threeheartsfarmmt@gmail.com';
-var phone = '406-600-8874'
-var firebaseUrl = 'https://brewdoctor-react.firebaseio.com/'
-var teamBios = require('./staticAssets/teamBios')
-var farmName = require('./staticAssets/farmName')
-var splashLogo = imagePath + 'thfheader.png';
-var mi = 'material-icons'
-var foodIssues = require('./staticAssets/foodIssues')
-
-var utl = { themeManager, styles, leftMenuItems, staticPages, errorMessages, imagePath, email, phone, firebaseUrl, teamBios, farmName, splashLogo, mi, foodIssues };
+var utl = {
+  themeManager: new mui.Styles.ThemeManager(),
+  styles: require('./styles/styles'),
+  leftMenuItems: require('./staticAssets/leftMenuItems'),
+  staticPages: require('./staticAssets/staticPages'),
+  errorMessages: require('./staticAssets/errorMessages'),
+  imagePath: ENV.imagePath,
+  email: farmInfo.email,
+  phone: farmInfo.phone,
+  firebaseUrl: ENV.firebaseUrl,
+  teamBios: require('./staticAssets/teamBios'),
+  farmName: farmInfo.name,
+  splashLogo: ENV.imagePath + 'thfheader.png',
+  foodIssues: require('./staticAssets/foodIssues'),
+};
 
 module.exports = utl;

@@ -1,6 +1,6 @@
 var assert = require('assert');
-var utl = require('./testUtil')
-var browser = require('gulp-webdriver/node_modules/webdriverio')
+var utl = require('./testUtil');
+var browser = require('gulp-webdriver/node_modules/webdriverio');
   .remote({
     desiredCapabilities: {
       browserName: 'chrome'

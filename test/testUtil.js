@@ -1,7 +1,7 @@
-var site = 'http://localhost:9000';
+var ENV = require('../config/config')
 
 var testUtl = {
-  site: site,
+  site: ENV.siteUrl,
 }
 
 module.exports = testUtl

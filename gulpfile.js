@@ -91,6 +91,7 @@ gulp.task('default', ['build', 'serve', 'sass', 'watch']);
 
 
 // For testing
+// From http://twin.github.io/selenium-testing-workflow-with-webdriverio/
 
 gulp.task('serve:test', function (done) {
   browserSync({

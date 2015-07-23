@@ -4,10 +4,8 @@ node_modules
 *.pyc
 main.js
 style.css
-.grunt
 _SpecRunner.html
 __benchmarks__
-build/
 .module-cache
 *.gem
 docs/.bundle

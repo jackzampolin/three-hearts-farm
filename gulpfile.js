@@ -34,6 +34,7 @@ var notify = function(error) {
   }
 
   console.log(title+"\n"+message);
+  console.log(error);
 };
 
 var bundler = watchify(browserify({
@@ -88,7 +89,6 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['build', 'serve', 'sass', 'watch']);
-
 
 // For testing
 // From http://twin.github.io/selenium-testing-workflow-with-webdriverio/

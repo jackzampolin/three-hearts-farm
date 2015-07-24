@@ -4,7 +4,7 @@ var mui = require('material-ui');
 
 // Local Files
 var utl = require('../utils/utl');
-var CommunicationEmail = require('../svgIcons/communicationEmail');
+var CommunicationEmail = require('./svgIcons/communicationEmail');
 
 // Elements
 var Paper = mui.Paper;

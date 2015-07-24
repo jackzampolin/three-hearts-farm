@@ -1,4 +1,4 @@
-var imagePath = require('./imagePath')
+var imagePath = require('../../../config/config').imagePath
 
 var betsyHicks = {
   faceShot: imagePath + 'sampleProfile.jpg',

@@ -1,7 +1,7 @@
 var ENV = require('../config/config')
 
 var testUtl = {
-  site: ENV.siteUrl,
+  site: ENV.testUrl,
 }
 
 module.exports = testUtl

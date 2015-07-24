@@ -4,3 +4,6 @@ To run just:
 
 npm install
 gulp
+
+To run tests:
+gulp test

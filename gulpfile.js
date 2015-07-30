@@ -11,8 +11,6 @@ var watch = require('gulp-watch');
 // For testing
 var webdriver = require('gulp-webdriver');
 var browserSync = require('browser-sync');
-var selenium = require('gulp-webdriver/node_modules/selenium-standalone');
-var mocha = require('gulp-mocha');
 
 var notify = function(error) {
   var message = 'In: ';
@@ -105,41 +103,14 @@ gulp.task('serve:test', function (done) {
   }, done);
 });
 
-gulp.task('selenium', function (done) {
-  selenium.install({
-    version: '2.46.0',
-    baseURL: 'http://selenium-release.storage.googleapis.com',
-    drivers: {
-      chrome: {
-        version: '2.16',
-        arch: process.arch,
-        baseURL: 'http://chromedriver.storage.googleapis.com'
-      },
-      ie: {
-        version: '2.45',
-        arch: process.arch,
-        baseURL: 'http://selenium-release.storage.googleapis.com'
+gulp.task('test', ['serve:test'], function () {
+  return gulp.src('./test/**/*.js', {read: false})
+    .pipe(webdriver({
+      desiredCapabilities: {
+        browserName: 'chrome'
       }
-    },
-    logger: function (message) { }
-  }, function (err) {
-    if (err) return done(err);
-
-    selenium.start(function (err, child) {
-      if (err) return done(err);
-      selenium.child = child;
-      done();
+    }))
+    .once('end', function () {
+      browserSync.exit();
     });
-  });
-});
-
-gulp.task('integration', ['serve:test', 'selenium'], function () {
-  return gulp.src('test/**/*.js', {read: false})
-    .pipe(mocha({ timeout: 5000 }));
-});
-
-gulp.task('test', ['integration'], function () {
-  selenium.child.kill();
-  browserSync.exit();
-  return null
 });

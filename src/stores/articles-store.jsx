@@ -7,9 +7,6 @@ var _ = require('lodash');
 var utl = require('../utils/utl');
 var Actions = require('../actions');
 
-// Firebase Auth data
-// https://www.firebase.com/docs/web/guide/login/google.html
-
 module.exports = Reflux.createStore({
 
   listenables: [Actions],

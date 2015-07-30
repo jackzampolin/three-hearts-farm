@@ -5,7 +5,8 @@ var mui = require('material-ui');
 var utl = require('../../utils/utl');
 var TeamCard = require('../../components/teamCard')
 // Elements
-var styles = utl.styles;
+var styles = utl.styles.staticPages;
+var trg = utl.styles.trg;
 var Paper = mui.Paper;
 var CardTitle = mui.CardTitle;
 
@@ -21,16 +22,17 @@ var Team = React.createClass({
   render () {
     var assets = utl.staticPages.teamPage
     var bios = utl.teamBios
-    return <Paper style={styles.splashContainer}>
+    debugger
+    return <Paper style={styles.container}>
       <CardTitle
         className='cardTitle'
         title={assets.title}
         subtitle={assets.subtitle}/>
-      <div className={styles.row}>
-        <div className={styles.halfSpan}>
+      <div className={trg.row}>
+        <div className={trg.halfSpan}>
           <TeamCard {...bios.betsyHicks}/>
         </div>
-        <div className={styles.halfSpan}>
+        <div className={trg.halfSpan}>
           <TeamCard {...bios.karenPage}/>
         </div>
       </div>

@@ -8,7 +8,7 @@ var CommunicationEmail = require('../../components/svgIcons/communicationEmail')
 var CommunicationPhone = require('../../components/svgIcons/communicationPhone');
 
 // Elements
-var styles = utl.styles;
+var styles = utl.styles.staticPages;
 var Paper = mui.Paper;
 var CardMedia = mui.CardMedia;
 var CardText = mui.CardText;
@@ -30,7 +30,7 @@ var Contact = React.createClass({
   },
   render () {
     var assets = utl.staticPages.contactPage
-    return <Paper style={ styles.splashContainer }>
+    return <Paper style={ styles.container }>
       <div style={ styles.mapContainer }>
         <iframe style={ styles.iframe } src={ assets.mapPath } />
       </div>
@@ -40,7 +40,7 @@ var Contact = React.createClass({
         subtitle={ assets.subtitle } />
       <CardText
         className='cardText'
-        style={ styles.splashText }>
+        style={ styles.text }>
         <List>
           <ListItem
             primaryText={ utl.email }

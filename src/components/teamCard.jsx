@@ -7,6 +7,7 @@ var utl = require('../utils/utl');
 var CommunicationEmail = require('./svgIcons/communicationEmail');
 
 // Elements
+var styles = utl.styles.teamCard
 var Paper = mui.Paper;
 var CardTitle = mui.CardTitle;
 var Card = mui.Card;
@@ -26,7 +27,7 @@ var teamCard = React.createClass({
     };
   },
   render () {
-    return <Card style={{ margin: '2%'}}>
+    return <Card style={styles.card}>
       <CardMedia>
         <img src={this.props.faceShot}/>
       </CardMedia>
@@ -34,9 +35,9 @@ var teamCard = React.createClass({
         className='teamInfo'
         title={this.props.name}
         subtitle={this.props.position}
-        avatar={<CommunicationEmail style={{ width:'2em', height: '2em'}}/>}
+        avatar={<CommunicationEmail style={styles.svgIcon}/>}
       />
-      <CardText style={{ marginTop: '-1em' }}>{this.props.text}</CardText>
+      <CardText style={styles.text}>{this.props.text}</CardText>
     </Card>
   },
 });

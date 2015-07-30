@@ -6,7 +6,7 @@ var mui = require('material-ui');
 var utl = require('../../utils/utl');
 
 // Elements
-var styles = utl.styles;
+var styles = utl.styles.staticPages;
 var Paper = mui.Paper;
 var CardMedia = mui.CardMedia;
 var CardText = mui.CardText;
@@ -24,7 +24,7 @@ var About = React.createClass({
   },
   render () {
     var assets = utl.staticPages.aboutPage
-    return <Paper style={styles.splashContainer}>
+    return <Paper style={styles.container}>
       <CardMedia>
         <img src={assets.image} />
       </CardMedia>
@@ -34,7 +34,7 @@ var About = React.createClass({
         subtitle={assets.subtitle}/>
       <CardText
         className='cardText'
-        style={styles.splashText}>
+        style={styles.text}>
         {assets.text}
       </CardText>
     </Paper>

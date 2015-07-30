@@ -3,19 +3,22 @@ var React = require('react');
 var Router = require('react-router')
 var Reflux = require('reflux');
 var mui = require('material-ui');
+var _ = require('lodash')
 
 // Local files
 var utl = require('../utils/utl');
 var Actions = require('../actions');
 var ArticlesStore = require('../stores/articles-store');
 var Loading = require('../components/loading');
-var DisplayArticleCard = require('../components/displayArticleCard');
+var BlogPost = require('../components/blogPost');
+var ArticleLink = require('../components/ArticleLink');
+var Footer = require('../components/footer');
 
 // Elements
-var styles = utl.styles;
+var styles = utl.styles.blog;
 var Paper = mui.Paper;
-var List = mui.List;
-var ListItem = mui.ListItem;
+var Tabs = mui.Tabs;
+var Tab = mui.Tab;
 var Link = Router.Link;
 
 
@@ -33,23 +36,16 @@ var Blog = React.createClass({
   ],
   getInitialState () {
     return {
-      articles: [],
-      selectedArticle: null,
+      articles: null,
     }
   },
   componentWillMount () {
     Actions.getArticles();
   },
   render () {
-    return <Paper style={styles.paperContainer}>
-      <div className={styles.row}>
-        <div className={styles.quarterSpan}>
-          { !!this.state.articles ? this._renderTitleLinks() : null }
-        </div>
-        <div className={styles.threeQuarterSpan}>
-          { this.state.selectedArticle ? this._renderPost() : this._renderPosts() }
-        </div>
-      </div>
+    return <Paper style={styles.container}>
+      { !!this.state.articles ? this._blogPage() : <Loading /> }
+      <Footer />
     </Paper>
   },
   _onChange (event, articles) {
@@ -59,24 +55,17 @@ var Blog = React.createClass({
       this.setState({ articles: null })
     }
   },
-  _renderTitleLinks () {
-    var titleLinks = this.state.articles.map(function(article){
-      return <Link key={Math.random()} to={'/blog/' + article.id}>
-        <ListItem
-          primaryText={article.title}
-          secondaryText={article.author}
-        />
-      </Link>
-    })
-    return <List>
-      { titleLinks }
-    </List>
-  },
-  _renderPosts () {
-    var articles = this.state.articles
-    return articles.map(function (article) {
-      return <DisplayArticleCard {...article}/>
-    });
+  _blogPage () {
+    if (this.props.params.id) {
+      var article = _.filter(this.state.articles, function(article){
+        return article.id === this.props.params.id
+      }.bind(this))[0]
+      return <BlogPost {...article} />
+    } else {
+      return this.state.articles.map(function(article){
+        return <ArticleLink {...article} key={article.id} />
+      });
+    }
   },
 });
 

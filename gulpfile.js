@@ -34,7 +34,6 @@ var notify = function(error) {
   }
 
   console.log(title+"\n"+message);
-  console.log(error);
 };
 
 var bundler = watchify(browserify({

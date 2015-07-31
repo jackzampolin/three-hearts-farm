@@ -4,7 +4,7 @@ var mui = require('material-ui');
 // Local Files
 var utl = require('../../utils/utl');
 // Elements
-var styles = utl.styles.staticPages
+var styles = utl.styles.pages.staticP.defaultPage
 var Paper = mui.Paper;
 var CardTitle = mui.CardTitle;
 var CardText = mui.CardText;

@@ -15,7 +15,7 @@ var ArticleLink = require('../components/ArticleLink');
 var Footer = require('../components/footer');
 
 // Elements
-var styles = utl.styles.blog;
+var styles = utl.styles.pages.blog;
 var Paper = mui.Paper;
 var Tabs = mui.Tabs;
 var Tab = mui.Tab;

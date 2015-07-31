@@ -16,6 +16,7 @@
   "devDependencies": {
     "browser-sync": "^2.8.0",
     "browserify": "^9.0.3",
+    "browserify-fs": "^1.0.0",
     "gulp": "^3.8.11",
     "gulp-cli": "^0.3.0",
     "gulp-concat": "^2.5.2",
@@ -26,7 +27,10 @@
     "gulp-util": "^3.0.4",
     "gulp-watch": "^4.2.4",
     "gulp-webdriver": "^0.1.1",
+    "node-require-directory": "^1.0.2",
     "reactify": "^1.1.0",
+    "require-dir": "^0.3.0",
+    "require-directory": "^2.1.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^2.4.0",
     "webdriverio": "^3.1.0"

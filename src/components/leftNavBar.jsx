@@ -5,6 +5,7 @@ var mui = require('material-ui');
 
 // Local Files
 var utl = require('../utils/utl');
+var styles = utl.styles.components.leftNavBar
 
 // Elements
 var LeftNav = mui.LeftNav;

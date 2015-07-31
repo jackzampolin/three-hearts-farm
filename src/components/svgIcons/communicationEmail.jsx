@@ -1,6 +1,8 @@
 var React = require('react');
 var mui = require('material-ui')
 var SvgIcon = mui.SvgIcon;
+var styles = require('../../utils/utl').styles.components.svgIcons.communicationEmail
+
 
 var CommunicationEmail = React.createClass({
 

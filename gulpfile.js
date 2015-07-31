@@ -8,6 +8,7 @@ var server = require('gulp-server-livereload');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
+var merge = require('merge-stream');
 // For testing
 var webdriver = require('gulp-webdriver');
 var browserSync = require('browser-sync');
@@ -113,4 +114,71 @@ gulp.task('test', ['serve:test'], function () {
     .once('end', function () {
       browserSync.exit();
     });
+});
+
+// Automatically creates components with proper boilerplate and creates associated tests and styles files with the associated boilerplate for each.  Files have reminders in the tops to take necessary action to include them.
+
+gulp.task('create', function() {
+  var bp = '/boilerplate'
+  if (gutil.env.component) {
+
+    var path = '/components'
+    var fname = gutil.env.component
+
+    var component = gulp.src(['src' + path + bp + '.jsx'])
+      .pipe(concat(fname + '.jsx'))
+      .pipe(gulp.dest('src' + path))
+
+    var test = gulp.src(['test'+ path + bp +'.js'])
+      .pipe(concat(fname + '.js'))
+      .pipe(gulp.dest('test' + path))
+
+    return merge(component,test)
+
+  } else if (gutil.env.svgIcon) {
+
+    var path = '/components/svgIcons'
+    var fname = gutil.env.svgIcon
+
+    var component = gulp.src(['src' + path + bp + '.jsx'])
+      .pipe(concat(fname + '.jsx'))
+      .pipe(gulp.dest('src' + path))
+
+    var test = gulp.src(['test' + path + bp + '.js'])
+      .pipe(concat(fname + '.js'))
+      .pipe(gulp.dest('test' + path))
+
+    return merge(component,test)
+
+  } else if (gutil.env.page) {
+
+    var path = '/pages'
+    var fname = gutil.env.page
+
+    var component = gulp.src(['src' + path + bp + '.jsx'])
+      .pipe(concat(fname + '.jsx'))
+      .pipe(gulp.dest('src' + path))
+
+    var test = gulp.src(['test' + path + bp + '.js'])
+      .pipe(concat(fname + '.js'))
+      .pipe(gulp.dest('test' + path))
+
+    return merge(component,test)
+
+  } else if (gutil.env.static) {
+
+    var path = '/pages/static'
+    var fname = gutil.env.static
+
+    var component = gulp.src(['src' + pages + bp + '.jsx'])
+      .pipe(concat(fname + '.jsx'))
+      .pipe(gulp.dest('src/pages/static'))
+
+    var test = gulp.src(['test' + path + bp + '.js'])
+      .pipe(concat(fname + '.js'))
+      .pipe(gulp.dest('test' + path))
+
+    return merge(component,test)
+
+  }
 });

@@ -5,7 +5,7 @@ var mui = require('material-ui');
 var utl = require('../../utils/utl');
 var TeamCard = require('../../components/teamCard')
 // Elements
-var styles = utl.styles.staticPages;
+var styles = utl.styles.pages.staticP.team;
 var trg = utl.styles.trg;
 var Paper = mui.Paper;
 var CardTitle = mui.CardTitle;
@@ -22,7 +22,6 @@ var Team = React.createClass({
   render () {
     var assets = utl.staticPages.teamPage
     var bios = utl.teamBios
-    debugger
     return <Paper style={styles.container}>
       <CardTitle
         className='cardTitle'

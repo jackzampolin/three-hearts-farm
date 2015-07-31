@@ -5,7 +5,7 @@ var mui = require('material-ui');
 // Local Files
 var utl = require('../utils/utl');
 // Elements
-var styles = utl.styles.articleLink;
+var styles = utl.styles.components.articleLink;
 var Card = mui.Card;
 var Link = Router.Link;
 var CardMedia = mui.CardMedia;

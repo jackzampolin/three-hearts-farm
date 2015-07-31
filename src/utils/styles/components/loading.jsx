@@ -1,3 +1,5 @@
+var commonStyles = require('./commonStyles')
+
 var loading = {
   position: {
     paddingLeft: '40%',

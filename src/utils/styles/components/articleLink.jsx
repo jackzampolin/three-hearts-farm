@@ -1,3 +1,5 @@
+var commonStyles = require('./commonStyles')
+
 var articleLink = {
   card: {
     width: '90%',

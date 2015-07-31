@@ -9,18 +9,14 @@
 
 // Node Modules
 var React = require('react');
-var Router = require('react-router');
-var Reflux = require('reflux');
 var mui = require('material-ui');
 // Local Files
-var Actions = require('../actions');
 var utl = require('../utils/utl');
-var UserStore = require('../stores/users-store');
 // Elements
-var styles = utl.styles.pages.BoilerPlatePage;
+var styles = utl.styles.components.boilerPlateComponent;
 var Paper = mui.Paper;
 
-var BoilerPlatePage = React.createClass({
+var BoilerPlateComponent = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
@@ -29,12 +25,9 @@ var BoilerPlatePage = React.createClass({
       muiTheme: utl.themeManager
     };
   },
-  mixins : [
-    Reflux.listenTo(UserStore, '_onChange'),
-  ],
   getInitialState () {
     return {
-      user: null,
+      state: null,
     }
   },
   componentWillMount () {
@@ -44,13 +37,13 @@ var BoilerPlatePage = React.createClass({
     return <div>
     </div>
   },
-  _onChange (event, user) {
-    if (!!user && user.isLoggedIn) {
-      this.setState({ user })
+  _onChange (event, state) {
+    if (condition) {
+      this.setState({ state })
     } else {
-      this.setState({ user: null })
+      this.setState({ state: null })
     }
   },
 });
 
-module.exports = BoilerPlatePage;
+module.exports = BoilerPlateComponent;

@@ -1,3 +1,5 @@
+var commonStyles = require('./commonStyles')
+
 var blog = {
   container: {
     width: '90%',

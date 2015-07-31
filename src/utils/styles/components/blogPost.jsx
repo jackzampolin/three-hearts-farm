@@ -1,3 +1,5 @@
+var commonStyles = require('./commonStyles')
+
 var blogPost = {
   paragraph: {
     display: 'block',

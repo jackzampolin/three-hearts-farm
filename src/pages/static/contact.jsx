@@ -8,7 +8,7 @@ var CommunicationEmail = require('../../components/svgIcons/communicationEmail')
 var CommunicationPhone = require('../../components/svgIcons/communicationPhone');
 
 // Elements
-var styles = utl.styles.staticPages;
+var styles = utl.styles.pages.staticP.contact;
 var Paper = mui.Paper;
 var CardMedia = mui.CardMedia;
 var CardText = mui.CardText;

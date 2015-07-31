@@ -8,7 +8,7 @@ var utl = require('../utils/utl')
 
 // Elements
 var Link = Router.Link;
-var styles = utl.styles.footer
+var styles = utl.styles.components.footer
 var FlatButton = mui.FlatButton
 
 var Footer = React.createClass({

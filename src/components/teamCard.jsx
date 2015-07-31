@@ -7,7 +7,7 @@ var utl = require('../utils/utl');
 var CommunicationEmail = require('./svgIcons/communicationEmail');
 
 // Elements
-var styles = utl.styles.teamCard
+var styles = utl.styles.components.teamCard
 var Paper = mui.Paper;
 var CardTitle = mui.CardTitle;
 var Card = mui.Card;

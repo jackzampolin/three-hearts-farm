@@ -6,7 +6,7 @@ var Router = require('react-router')
 var utl = require('../utils/utl');
 var NavigationArrowBack = require('./svgIcons/navigationArrowBack');
 // Elements
-var styles = utl.styles.blogPost;
+var styles = utl.styles.components.blogPost;
 var Card = mui.Card;
 var CardMedia = mui.CardMedia;
 var CardHeader = mui.CardHeader;

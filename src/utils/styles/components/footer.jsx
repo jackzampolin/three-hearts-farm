@@ -1,3 +1,5 @@
+var commonStyles = require('./commonStyles')
+
 var footer = {
   footerWrapper: {
     margin: 'auto',

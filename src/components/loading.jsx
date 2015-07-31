@@ -5,7 +5,7 @@ var mui = require('material-ui')
 var utl = require('../utils/utl')
 // Elements
 var CircularProgress = mui.CircularProgress;
-var styles = utl.styles.loading
+var styles = utl.styles.components.loading
 
 var Loading = React.createClass({
 

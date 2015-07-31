@@ -6,7 +6,7 @@ var utl = require('../utils/utl')
 var Footer = require('../components/footer')
 var Default = require('./static/default')
 // Elements
-var styles = utl.styles.staticPages
+var styles = utl.styles.pages.staticPages
 var CardMedia = mui.CardMedia;
 var Card = mui.Card;
 

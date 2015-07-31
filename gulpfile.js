@@ -12,6 +12,7 @@ var merge = require('merge-stream');
 // For testing
 var webdriver = require('gulp-webdriver');
 var browserSync = require('browser-sync');
+var ENV = require('./config/config')
 
 var notify = function(error) {
   var message = 'In: ';
@@ -97,19 +98,22 @@ gulp.task('serve:test', function (done) {
     notify: false,
     open: false,
     port: 9000,
-    server: {
-      baseDir: ['dist']
-    },
+    server: { baseDir: ['dist'] },
     ui: false
   }, done);
 });
+
 
 gulp.task('test', ['serve:test'], function () {
   return gulp.src('./test/**/*.js', {read: false})
     .pipe(webdriver({
       desiredCapabilities: {
-        browserName: 'chrome'
-      }
+        browserName: 'chrome',
+        platform: 'OS X 10.10',
+        version: '43.0',
+      },
+      waitforTimeout: 10000,
+      baseUrl: ENV.testUrl,
     }))
     .once('end', function () {
       browserSync.exit();
@@ -117,68 +121,50 @@ gulp.task('test', ['serve:test'], function () {
 });
 
 // Automatically creates components with proper boilerplate and creates associated tests and styles files with the associated boilerplate for each.  Files have reminders in the tops to take necessary action to include them.
+var notifyCreate = function (path, fname, bp) {
+  var thing = path.split('/').pop()
+  var message = '\n\nCreating files for ' + thing.slice(0,-1) + ' named ' + fname + '...\n'
+  var sourceMessage = 'Using boilerplate files in ' + path + '...\n\n'
+  var react = '  -React component created: /src' + path + '/' + fname + '.jsx\n'
+  var test = '  -Test file created: /test' + path + '/' + fname + '.js\n'
+  var styles = '  -Styles file created: /src/utils/styles' + path + '/' + fname + '.jsx\n\n'
+  var warning = 'PLEASE GO TO ALL FILES AND FOLLOW INSTRUCTIONS.\nStyles need to be hooked up manually\n\n'
+  console.log(message + sourceMessage + react + test + styles + warning)
+}
+
+var createComponentFiles = function (path,fname) {
+  var bp = '/boilerplate'
+  var component = gulp.src(['src' + path + bp + '.jsx'])
+    .pipe(concat(fname + '.jsx'))
+    .pipe(gulp.dest('src' + path))
+
+  var test = gulp.src(['test'+ path + bp +'.js'])
+    .pipe(concat(fname + '.js'))
+    .pipe(gulp.dest('test' + path))
+
+  var style = gulp.src(['src/utils/styles' + path + bp + '.jsx'])
+    .pipe(concat(fname + '.jsx'))
+    .pipe(gulp.dest('src/utils/styles' + path))
+  notifyCreate(path, fname, bp);
+  return merge(component,test,style)
+};
+
+var createStoreFile = function (name) {
+  var component = gulp.src(['src/stores/boilerplate.jsx'])
+    .pipe(concat(name + '.jsx'))
+    .pipe(gulp.dest('src/stores/'))
+};
 
 gulp.task('create', function() {
-  var bp = '/boilerplate'
   if (gutil.env.component) {
-
-    var path = '/components'
-    var fname = gutil.env.component
-
-    var component = gulp.src(['src' + path + bp + '.jsx'])
-      .pipe(concat(fname + '.jsx'))
-      .pipe(gulp.dest('src' + path))
-
-    var test = gulp.src(['test'+ path + bp +'.js'])
-      .pipe(concat(fname + '.js'))
-      .pipe(gulp.dest('test' + path))
-
-    return merge(component,test)
-
+    createComponentFiles('/components', gutil.env.component)
   } else if (gutil.env.svgIcon) {
-
-    var path = '/components/svgIcons'
-    var fname = gutil.env.svgIcon
-
-    var component = gulp.src(['src' + path + bp + '.jsx'])
-      .pipe(concat(fname + '.jsx'))
-      .pipe(gulp.dest('src' + path))
-
-    var test = gulp.src(['test' + path + bp + '.js'])
-      .pipe(concat(fname + '.js'))
-      .pipe(gulp.dest('test' + path))
-
-    return merge(component,test)
-
+    createComponentFiles('/components/svgIcons', gutil.env.svgIcon)
   } else if (gutil.env.page) {
-
-    var path = '/pages'
-    var fname = gutil.env.page
-
-    var component = gulp.src(['src' + path + bp + '.jsx'])
-      .pipe(concat(fname + '.jsx'))
-      .pipe(gulp.dest('src' + path))
-
-    var test = gulp.src(['test' + path + bp + '.js'])
-      .pipe(concat(fname + '.js'))
-      .pipe(gulp.dest('test' + path))
-
-    return merge(component,test)
-
+    createComponentFiles('/pages', gutil.env.page)
   } else if (gutil.env.static) {
-
-    var path = '/pages/static'
-    var fname = gutil.env.static
-
-    var component = gulp.src(['src' + pages + bp + '.jsx'])
-      .pipe(concat(fname + '.jsx'))
-      .pipe(gulp.dest('src/pages/static'))
-
-    var test = gulp.src(['test' + path + bp + '.js'])
-      .pipe(concat(fname + '.js'))
-      .pipe(gulp.dest('test' + path))
-
-    return merge(component,test)
-
+    createComponentFiles('/pages/static', gutil.env.static)
+  } else if (gutil.env.store) {
+    createStoreFile(gutil.env.store)
   }
 });

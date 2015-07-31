@@ -1,10 +1,10 @@
-var test = require('../../testConfig.js')
-var assert = test.assert
-var url = test.url + "/#/about"
+var assert = require('assert')
+var config = require('../../config')
+var path = "/#/about"
 
 describe('About Page Test', function() {
   it('contains proper assets', function(done) {
-    browser.url(url)
+    browser.url(config.url + path)
       .getText(".cardTitle")
       .then(function(value){
         assert(value.indexOf('About') !== -1)
@@ -16,7 +16,7 @@ describe('About Page Test', function() {
       .call(done)
   })
   it('has a working menu bar', function(done) {
-    browser.url(url)
+    browser.url(config.url + path)
       .click('.hamburgerMenu')
       .isVisible('.navRef')
       .then(function(isVisible) {

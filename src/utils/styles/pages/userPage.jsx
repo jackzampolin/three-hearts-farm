@@ -1,6 +1,9 @@
+// IMPORTANT!!!!
+// -------------
+// Remember to hook up in styles.jsx
 var commonStyles = require('./commonStyles')
 
-var userPage = {
+var StylesBoilerPlateSvgIcons = {
   margin: 'auto',
 }
-module.exports = userPage
+module.exports = StylesBoilerPlateSvgIcons

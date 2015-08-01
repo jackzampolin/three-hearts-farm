@@ -12,7 +12,6 @@ var merge = require('merge-stream');
 // For testing
 var webdriver = require('gulp-webdriver');
 var browserSync = require('browser-sync');
-var ENV = require('./config/config')
 
 var notify = function(error) {
   var message = 'In: ';
@@ -113,7 +112,6 @@ gulp.task('test', ['serve:test'], function () {
         version: '43.0',
       },
       waitforTimeout: 10000,
-      baseUrl: ENV.testUrl,
     }))
     .once('end', function () {
       browserSync.exit();

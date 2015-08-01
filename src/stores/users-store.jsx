@@ -13,21 +13,17 @@ var Actions = require('../actions');
 module.exports = Reflux.createStore({
   listenables: [Actions],
   _baseRef: new Firebase(utl.firebaseUrl),
-  _usersRef: new Firebase(utl.firebaseUrl + 'users/'),
+  _usersRef: new Firebase(utl.firebaseUrl + 'usersLog/'),
   getCurrentUser () {
-    this.trigger('change', this.currentUser)
+    this.trigger('change', this._currentUser)
   },
   login () {
     this._baseRef.authWithOAuthPopup('google', function(error,authData) {
       if (error) {
         this._handleLoginError(error);
       } else {
-        // Sets the user ref for the session
-        this._loginCompleted(authData);
         // Sets event listener for auth events
         this._onAuth(authData);
-        // Sets event listener for profile changes
-        this._onValue(authData);
       }
     }.bind(this), { remember: 'sessionOnly', scope: 'email' });
   },
@@ -35,25 +31,36 @@ module.exports = Reflux.createStore({
     this._baseRef.unauth()
   },
   _setCurrentUser (profile) {
-    this.currentUser = profile
-    this.trigger('change',this.currentUser);
-  },
-  _loginCompleted (authData) {
-    this.userRef = new Firebase(utl.firebaseUrl + 'users/' + authData.uid);
-  },
-  _onValue (authData) {
-    this.userRef.on('value', function(profile){
-      this._setCurrentUser(profile.val())
-    }.bind(this));
+    this._currentUser = profile
+    this.trigger('change',this._currentUser);
   },
   _onAuth(authData) {
-    this.userRef.onAuth(function(authData){
-      if (!!authData) {
-        this.userRef.update({ isLoggedIn: true })
+    this._usersRef.onAuth(function(authData){
+      if (!authData) {
+        var user = this._currentUser
+        var logReport = {
+          email: user.email,
+          name: user.name,
+          profileImageURL: user.profileImageURL,
+          uid: user.uid,
+          operation: 'logout',
+          time: Date.now(),
+          isLoggedIn: false,
+        }
+        this._usersRef.push(logReport)
+        this._setCurrentUser(null)
       } else {
-        this.userRef.update({ isLoggedIn: false });
-        this.currentUser = null;
-        this.trigger('change', this.currentUser)
+        var tempProfile = {
+          email: authData.google.email,
+          name: authData.google.displayName,
+          profileImageURL: authData.google.profileImageURL,
+          uid: authData.uid,
+          operation: 'login',
+          time: Date.now(),
+          isLoggedIn: true,
+        }
+        this._usersRef.push(tempProfile)
+        this._setCurrentUser(tempProfile)
       }
     }.bind(this))
   },

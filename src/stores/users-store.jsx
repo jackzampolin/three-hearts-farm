@@ -22,7 +22,6 @@ module.exports = Reflux.createStore({
       if (error) {
         this._handleLoginError(error);
       } else {
-        // Sets event listener for auth events
         this._onAuth(authData);
       }
     }.bind(this), { remember: 'sessionOnly', scope: 'email' });

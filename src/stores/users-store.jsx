@@ -89,6 +89,8 @@ module.exports = Reflux.createStore({
       name: authData.google.displayName,
       profileImageURL: authData.google.profileImageURL,
       uid: authData.uid,
+      validated: false,
+      isBetsyOrJack: false,
       officePhone: null,
       personalPhone: null,
       businessName: null,

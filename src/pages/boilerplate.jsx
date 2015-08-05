@@ -45,11 +45,7 @@ var BoilerPlatePage = React.createClass({
     </div>
   },
   _onChange (event, user) {
-    if (!!user && user.isLoggedIn) {
-      this.setState({ user })
-    } else {
-      this.setState({ user: null })
-    }
+    this.setState({ user })
   },
 });
 

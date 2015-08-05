@@ -20,7 +20,7 @@ var LeftNavBar = React.createClass({
     var partnerMenu = menu.partner
     var menuItems = basicMenu.concat(partnerMenu)
     if (this.props.uid) {
-      var userMenu = menu.user(this.props.uid)
+      var userMenu = menu.user()
       menuItems.splice(0,0,userMenu[0],userMenu[1])
     };
     return  <div>

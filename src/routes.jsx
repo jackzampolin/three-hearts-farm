@@ -35,7 +35,7 @@ module.exports = (
       <Route path='blog' component={ Blog }>
         <Route path=':id' component={ Blog } />
       </Route>
-      <Route path='users/:id' component={ UserPage } />
+      <Route path='profile' component={ UserPage } />
       <Route path='storefront' component={ Storefront } />
     </Route>
   </Router>

@@ -1,6 +1,16 @@
 var Partners = [
   {
-    name: "Huckleberry's",
+    name: "Root Cellar Foods",
+    address: 'N/A',
+    url: 'http://rootcellarfoods.net'
+  },
+  {
+    name: "Community Foods Co-Op",
+    address: '908 W Main St.',
+    url: 'http://bozo.coop'
+  },
+  {
+    name: "Huckleberry's at Rosauers",
     address: '3255 Technology Blvd',
     url: 'http://huckleberrysnaturalmarket.com/pages/locBoze.htm'
   },
@@ -30,13 +40,13 @@ var Partners = [
     url: 'http://openrangemt.com/'
   },
   {
-    name: 'Blackbird Kitchen',
-    address: '140 E Main St.',
-    url: 'http://blackbirdkitchen.com/'
+    name: 'Blacksmith Itailian',
+    address: '290 W Kagy Bvld.',
+    url: 'http://blacksmithitalian.com/'
   },
   {
     name: 'Sola Café',
-    address: '290 W Kagy',
+    address: '290 W Kagy Blvd.',
     url: 'http://www.solacafe.com/'
   }
 ];

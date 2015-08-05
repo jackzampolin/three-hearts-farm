@@ -22,6 +22,7 @@ var utl = {
   farmName: farmInfo.name,
   splashLogo: ENV.imagePath + 'thfheader.png',
   foodIssues: require('./staticAssets/foodIssues'),
+  validator: require('./staticAssets/validator')
 };
 
 module.exports = utl;

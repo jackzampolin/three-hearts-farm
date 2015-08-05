@@ -1,9 +1,16 @@
-// IMPORTANT!!!!
-// -------------
-// Remember to hook up in styles.jsx
 var commonStyles = require('./commonStyles')
 
-var StylesBoilerPlateSvgIcons = {
-  margin: 'auto',
+var userPage = {
+  container: commonStyles.container,
+  inputCols: {
+    paddingLeft: '2em',
+    paddingRight: '2em',
+  },
+  warningText: {
+    paddingTop: '1.75em',
+    paddingBottom: '1.75em',
+    textAlign: 'center',
+    fontSize: '3em',
+  }
 }
-module.exports = StylesBoilerPlateSvgIcons
+module.exports = userPage

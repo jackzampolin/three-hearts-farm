@@ -35,7 +35,7 @@ var teamCard = React.createClass({
         className='teamInfo'
         title={this.props.name}
         subtitle={this.props.position}
-        avatar={<CommunicationEmail style={styles.svgIcon}/>}
+        avatar={<Avatar icon={<CommunicationEmail/>} />}
       />
       <CardText style={styles.text}>{this.props.text}</CardText>
     </Card>

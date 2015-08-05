@@ -19,9 +19,9 @@ var partner = Partners.map(function(partner){
   }
 });
 
-var user = function(uid) {
+var user = function() {
   return [
-    { route: 'users/' + uid, text: 'Profile'},
+    { route: 'profile', text: 'Profile'},
     { route: 'storefront', text: 'Storefront'}
   ];
 };

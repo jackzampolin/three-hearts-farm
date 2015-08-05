@@ -74,11 +74,7 @@ var Main = React.createClass({
     this.refs.navRef ? this.refs.navRef.refs.navRef.toggle() : null
   },
   _onChange (event, user) {
-    if (!!user && user.isLoggedIn) {
-      this.setState({ user })
-    } else {
-      this.setState({ user: null })
-    }
+    this.setState({ user })
   },
   _loggedIn () {
     return <div>

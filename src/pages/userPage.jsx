@@ -47,7 +47,7 @@ var UserPage = React.createClass({
     return <Paper style={styles.container}>
       <Card>
         <CardMedia>
-          <img src={utl.imagePath + 'portico.jpg'}/>
+          <img src={utl.imagePath + 'seedlings.jpg'}/>
         </CardMedia>
         { user ? this._profile() : this._login() }
       </Card>
@@ -118,7 +118,7 @@ var UserPage = React.createClass({
   _profile () {
     var user = this.state.user
     this._userRef = new Firebase(utl.firebaseUrl + 'users/' + user.uid)
-    return <div className={trg.row}>
+    return <div style={styles.bottomPadding} className={trg.row}>
       <CardHeader
         avatar={<Avatar src={user.profileImageURL}/>}
         title={user.name}

@@ -25,7 +25,7 @@ var staticPages = React.createClass({
   render () {
     return <Card>
       <CardMedia style={styles.appBarPadding}>
-        <img src={utl.splashLogo} />
+        <img src={utl.imagePath + 'logos/LOGO-straight.png'} />
       </CardMedia>
         { this.props.children ? this.props.children : <Default /> }
       <Footer />

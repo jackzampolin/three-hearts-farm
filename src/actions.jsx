@@ -6,5 +6,6 @@ module.exports = Reflux.createActions([
   'login',
   'logout',
   'getCurrentUser',
-  'getArticles'
+  'getArticles',
+  'getItems',
 ]);

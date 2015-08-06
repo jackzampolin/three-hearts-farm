@@ -44,7 +44,7 @@ var Blog = React.createClass({
   },
   render () {
     return <Paper style={styles.container}>
-      { !!this.state.articles ? this._blogPage() : <Loading /> }
+      { !!this.state.articles ? this._blogPage() : <Loading style={styles.loading} /> }
       <Footer />
     </Paper>
   },

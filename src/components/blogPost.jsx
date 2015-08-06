@@ -13,6 +13,7 @@ var CardHeader = mui.CardHeader;
 var CardText = mui.CardText;
 var Paper = mui.Paper;
 var IconButton = mui.IconButton;
+var Avatar = mui.Avatar;
 
 var BlogPost = React.createClass({
   mixins: [ Router.Navigation ],
@@ -47,13 +48,10 @@ var BlogPost = React.createClass({
       style={styles.title}
       title={this.props.title}
       subtitle={this.props.author}
-      avatar={this._avatar()}
-    />
+      avatar={this._avatar()} />
   },
   _avatar () {
-    return <IconButton onClick={this._handleBackClick} tooltip="Back">
-      <NavigationArrowBack color='white'/>
-    </IconButton>
+    return <Avatar onClick={this._handleBackClick} style={styles.avatar} icon={ <NavigationArrowBack color='white'/> } />
   },
   _handleBackClick () {
     this.transitionTo('/blog')

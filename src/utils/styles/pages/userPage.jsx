@@ -11,6 +11,9 @@ var userPage = {
     paddingBottom: '1.75em',
     textAlign: 'center',
     fontSize: '3em',
+  },
+  bottomPadding: {
+    paddingBottom: '2em'
   }
 }
 module.exports = userPage

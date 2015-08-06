@@ -9,7 +9,8 @@ var blogPost = {
     fontSize: '1.4em'
   },
   textPadding: { paddingTop: '2em' },
-  title: { fontSize: '1.5em'}
+  title: { fontSize: '1.5em'},
+  avatar: { cursor: 'pointer' }
 }
 
 module.exports = blogPost

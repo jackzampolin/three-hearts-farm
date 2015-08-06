@@ -61,7 +61,6 @@ var Storefront = React.createClass({
       return <ListItem primaryText={item.category + " " + item.itemName + " " + item.subItemName + " " + item.quantity + " " + item.units}/>
     })
   },
-
 });
 
 module.exports = Storefront;

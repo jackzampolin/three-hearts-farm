@@ -11,7 +11,7 @@ var Actions = require('../actions');
 var ArticlesStore = require('../stores/articles-store');
 var Loading = require('../components/loading');
 var BlogPost = require('../components/blogPost');
-var ArticleLink = require('../components/ArticleLink');
+var ArticleLink = require('../components/articleLink');
 var Footer = require('../components/footer');
 
 // Elements

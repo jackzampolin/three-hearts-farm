@@ -12,8 +12,6 @@ var footer = require('./components/footer');
 var leftNavBar = require('./components/leftNavBar');
 var loading = require('./components/loading');
 var teamCard = require('./components/teamCard');
-var itemCategory = require('./components/itemCategory');
-var itemName = require('./components/itemName');
 // StaticPages
 var about = require('./pages/static/about');
 var defaultPage = require('./pages/static/default');

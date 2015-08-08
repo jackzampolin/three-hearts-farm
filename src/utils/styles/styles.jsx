@@ -41,8 +41,6 @@ var styles = {
     leftNavBar,
     loading,
     teamCard,
-    itemCategory,
-    itemName,
   },
   pages: {
     staticP: {

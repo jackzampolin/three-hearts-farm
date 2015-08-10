@@ -86,3 +86,11 @@ Holds all style objects to modify default styles in Material-UI components.  Org
 
 ####<code>test/</code>
 Holds all test files.  One per component.  Organized in a mirror of the component storage to reduce confusion.
+
+####Run App in Docker container
+First pull app to local folder and run <code>npm install</code>.
+If running on an OSx machine, have boot2docker installed then:
+```bash
+docker build -t <username>/<repo-name>:<tag> .
+docker run -d -p 8000:8000 --name three-hearts-farm <username>:<repo-name>:<tag>
+```

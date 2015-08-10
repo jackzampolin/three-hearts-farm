@@ -21,7 +21,7 @@ var bundle = function () {
   return bundler
     .bundle()
     .on('error', gutil.log)
-    .pipe(source('main.js'))
+    .pipe(gulp.src('main.js'))
     .pipe(gulp.dest('./dist'))
 }
 

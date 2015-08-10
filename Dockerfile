@@ -1,15 +1,8 @@
-FROM phusion/baseimage
+FROM node:0.10-onbuild
 
-RUN apt-get update && apt-get install -y \
-    nodejs \
-    nodejs-legacy \
-    npm \
-    git \
-    && \
-    git clone https://github.com/jackzampolin/three-hearts-farm && \
-    cd three-hearts-farm && \
-    npm install -g gulp-cli && \
-    npm install && \
-    gulp production \
+MAINTAINER Jack Zampolin <jack.zampolin@gmail.com>
 
+# Expose default port for application
 EXPOSE 8000
+
+CMD npm run production

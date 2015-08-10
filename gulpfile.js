@@ -2,10 +2,9 @@
 var gulp = require('gulp');
 
 // Require all other gulp tasks
-var requireDir = require('require-dir');
-requireDir('./gulp-tasks');
+require('require-dir')('./gulp-tasks');
 // Default production task
-gulp.task('production',['build:production', 'sass:production', 'serve:production'])
+gulp.task('production',['serve:production'])
 // Default development task
 gulp.task('default', ['build', 'serve', 'sass', 'watch']);
 // Default test task

@@ -1,11 +1,14 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 var reactify = require('reactify');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var babelify = require('babelify');
 var connect = require('gulp-connect');
+var buffer = require('vinyl-buffer');
+var uglify = require('gulp-uglify');
 
 // Bundles .jsx files for delivery to client browsers
 var bundler = browserify({
@@ -21,12 +24,14 @@ var bundle = function () {
   return bundler
     .bundle()
     .on('error', gutil.log)
-    .pipe(gulp.src('main.js'))
-    .pipe(gulp.dest('./dist'))
+    .pipe(source('main.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('dist'))
 }
 
 // Production server
-gulp.task('serve:production', function() {
+gulp.task('serve:production',['sass:production','build:production'], function() {
   connect.server({
     root: 'dist',
     port: 8000

@@ -10,7 +10,7 @@ var connect = require('gulp-connect');
 // Bundles .jsx files for delivery to client browsers
 var bundler = browserify({
   entries: ['./src/app.jsx'],
-  transform: [reactify, babelify],
+  transform: [babelify],
   extensions: ['.jsx'],
   debug: false,
   cache: {}, packageCache: {},

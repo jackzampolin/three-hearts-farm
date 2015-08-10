@@ -3,16 +3,16 @@ var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify');
 var server = require('gulp-server-livereload');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
+var babelify = require('babelify');
 var watch = require('gulp-watch');
 
 // bundles .jsx files required by /src/app.jsx
 var bundler = watchify(browserify({
   entries: ['./src/app.jsx'],
-  transform: [reactify],
+  transform: [babelify],
   extensions: ['.jsx'],
   debug: true, fullPaths: true,
   cache: {}, packageCache: {}

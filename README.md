@@ -91,6 +91,6 @@ Holds all test files.  One per component.  Organized in a mirror of the componen
 First pull app to local folder and run <code>npm install</code>.
 If running on an OSx machine, have boot2docker installed then:
 ```bash
-docker build -t <username>/<repo-name>:<tag> .
-docker run -d -p 8000:8000 --name three-hearts-farm <username>:<repo-name>:<tag>
+docker build -t jackzampolin/three-hearts-farm:latest https://github.com/jackzampolin/three-hearts-farm.git
+docker run -d -p 8000:8000 --name three-hearts-farm jackzampolin/three-hearts-farm:latest
 ```

@@ -58,39 +58,47 @@ README.md
 ####Gulpfile
 Contains all gulp commands:
 ```bash
-gulp serve - runs the server
-gulp bulid - builds main.js from .jsx files in the src directory.  App entry point is app.jsx -> routes.jsx -> main.jsx
-gulp sass - builds style.css from .scss files in the sass directory
-gulp watch - watches for changes in .jsx and .scss files
-gulp test - runs test server and associated selenium tests in the test directory
-gulp create --component <componentName> - Creates new component with boilerplate and associated test and styles file
-            --svgIcon <svgIconName> -  Creates new svgIcon with boilerplate and associated test and styles file
-            --page <pageName> -  Creates new page with boilerplate and associated test and styles file
-            --static <staticPageName> -  Creates new staticPage with boilerplate and associated test and styles file
-            --store <storeName> -  Creates new store with boilerplate
+gulp
 ```
+Runs build(concats jsx files in src and runs through babel), serve(runs livereload dev server), sass(concats scss files ), and watch (watches jsx and sass files for changes).
+```bash
+gulp production
+```
+Runs sass:production(concats scss files), build:production(concats, babelifys, and uglifys all jsx files in src), and serve:production(runs a basic node server).
+```bash
+gulp test
+```
+Runs run:test(runs all test files in the /test directory) and serve:test(starts a test server)
+```bash
+gulp create
+```
+Creates files from boilerplate.jsx files. Makes --component, --svgIcon, --page, --static, and --store files.  For component, svgIcon, page and static creates react boilerplate, test file, and style file.  For store creates just the store file.
+
 ####App Entry Point
 ```
 app.jsx -> routes.jsx -> main.jsx
 ```
-Note: Routing tree for application is in routes.jsx.  Also all associated react-router set-up
+Note: Routing tree for application is in routes.jsx with all associated react-router set-up
 
 ####React Component Storage
 'Pages' are stored in the <code>src/pages/</code> directory.  They are top level components made up of 'components' <code>src/components</code> and 'svgIcons' <code>src/components/svgIcons</code>.  'Static Pages' are held in <code>src/pages/static/</code> and the associated text is stored in <code>src/utils/staticAssets/</code>
 
-####<code>src/utils/utl.jsx</code>
-Holds constants, text, themes, and other assorted information like name constants and employee information
+####Utils folder
+<code>src/utils/utl.jsx</code> holds constants, text, themes, and other assorted information like name constants and employee information
 
-####<code>src/uitls/styles/styles.jsx</code>
-Holds all style objects to modify default styles in Material-UI components.  Organized as a mirror of the component storage to reduce confusion.
+####Styles foler
+<code>src/uitls/styles/styles.jsx</code> holds all style objects to modify default styles in Material-UI components.  Organized as a mirror of the component storage to reduce confusion.
 
-####<code>test/</code>
-Holds all test files.  One per component.  Organized in a mirror of the component storage to reduce confusion.
+####Test folder
+<code>test/</code> holds all test files, one per component.  Organized in a mirror of the component storage to reduce confusion.
 
-####Run App in Docker container
-First pull app to local folder and run <code>npm install</code>.
-If running on an OSx machine, have boot2docker installed then:
+####Dockerfile
+To create docker image on your local environment just run:
 ```bash
 docker build -t jackzampolin/three-hearts-farm:latest https://github.com/jackzampolin/three-hearts-farm.git
+```
+
+To run the image in a container with properly forwarded ports just run:
+```bash
 docker run -d -p 8000:8000 --name three-hearts-farm jackzampolin/three-hearts-farm:latest
 ```

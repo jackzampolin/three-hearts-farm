@@ -56,7 +56,7 @@ package.json
 README.md
 ```
 ####Gulpfile
-Contains all gulp commands:
+The main <code>gulpfile.js</code> requires all files in the <code>/gulp-tasks</code> folder and defines the following tasks:
 ```bash
 gulp
 ```

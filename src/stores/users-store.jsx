@@ -24,7 +24,7 @@ module.exports = Reflux.createStore({
   },
   // Triggers login flow.  Button held in main.jsx
   login () {
-    this._usersRef = this._baseRef.child('users'),
+    this._usersRef = this._baseRef.child('users');
     this._baseRef.onAuth(this._onAuth)
     this._baseRef.authWithOAuthPopup('google', this._login, this._googleAuthOptions);
   },
@@ -68,7 +68,7 @@ module.exports = Reflux.createStore({
   _saveUserData (authData) {
     var startProfile = this._newUserProfile(authData)
     this._usersRef.child(authData.uid).set(startProfile)
-    this._userRef = this._usersRef.child(profile.uid)
+    this._userRef = this._usersRef.child(startProfile.uid)
     this._userRef.on('value', this._handleDbChange)
     this._setCurrentUser(startProfile)
   },

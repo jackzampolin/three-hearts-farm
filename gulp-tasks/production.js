@@ -34,7 +34,7 @@ var bundle = function () {
 gulp.task('serve:production',['sass:production','build:production'], function() {
   connect.server({
     root: 'dist',
-    port: 8000
+    port: 80
   })
 });
 

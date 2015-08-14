@@ -63,5 +63,5 @@ gulp.task('sass', function () {
 
 // Watch sass files for changes
 gulp.task('watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
+  gulp.watch('./src/sass/**/*.scss', ['sass']);
 });

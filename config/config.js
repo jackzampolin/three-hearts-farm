@@ -1,7 +1,7 @@
 var environment = {
   'development': {
     firebaseUrl: 'https://brewdoctor-react.firebaseio.com/',
-    imagePath: './assets/images/',
+    imagePath: 'http://gdriv.es/three-hearts-farm',
     testUrl: 'http://localhost:9000',
     localUrl: 'http://localhost:8000',
   },

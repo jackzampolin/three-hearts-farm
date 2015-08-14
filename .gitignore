@@ -23,3 +23,7 @@ chrome-user-data
 *.sublime-workspace
 .idea
 *.iml
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -6,10 +6,10 @@ var React = require('react')
 var mui = require('material-ui');
 // Local Files
 var ENV = require('../../config/config');
-var farmInfo = require('./staticAssets/farmInfo')
+var farmInfo = require('./staticAssets/farmInfo');
 
 var utl = {
-  themeManager: new mui.Styles.ThemeManager(),
+  themeManager: require('./styles/themeManager'),
   styles: require('./styles/styles'),
   leftMenuItems: require('./staticAssets/leftMenuItems'),
   staticPages: require('./staticAssets/staticPages'),
@@ -22,8 +22,9 @@ var utl = {
   farmName: farmInfo.name,
   splashLogo: ENV.imagePath + 'thfheader.png',
   foodIssues: require('./staticAssets/foodIssues'),
-  validator: require('./staticAssets/validator'),
-  seedItems: require('./staticAssets/seedItems')
+  validator: require('./helpers/validator'),
+  seedItems: require('./staticAssets/seedItems'),
+  keygen: require('./helpers/keygen')
 };
 
 module.exports = utl;
